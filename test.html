@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/jquery.js"></script>
+	<script src="js/velocity.js"></script>
+	<script src="js/velocity.ui.min.js"></script>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box{
+			width: 200px;
+			height: 200px;
+			background-color: gold;
+			margin-top: 10px;
+			margin-left: 200px;
+		}
+	</style>
+</head>
+<body>
+	<div id="div1" class="box"></div>
+	<div id="div2" class="box"></div>
+	<div id="div3" class="box"></div>
+</body>
+<script>
+	$(function(){
+	// part1
+	/*$("#div1").velocity({
+		width: '400px'
+	},
+	{
+		duration:2000,
+		complete:function(){alert(123);}
+	});
+
+	$("#div2").velocity({
+		width: '500px'
+	},
+	{
+		duration:2000,
+		delay:2000
+	})*/
+
+	//part2 
+	/*var seq =[	//定义动画序列
+		{
+			elements:$("#div1"),
+			properties:{width:'400px'},
+			options:{duration:1500}
+		},
+		{
+			elements:$("#div2"),
+			properties:{width:'500px'},
+			options:{duration:1500}	
+		},
+		{
+			elements:$("#div3"),
+			properties:{width:'600px'},
+			options:{duration:1500}	
+		}
+	]; 
+	$.Velocity.RunSequence(seq); //依次展示动画，就不用卸载complete里面了 
+	*/
+
+	//part3
+	$("#div1").on("mouseover",function(){ //鼠标移上去之后，元素左右摇动一下
+		$(this).velocity("callout.shake");  //预定义名称可以官网查询 pre-registered
+	})
+
+	$.Velocity.RegisterEffect('lixin.pluse',{ //自定义动画以及动画名称 一次定义 多次使用 RegisterEffect = RegisterUI
+		defaultDuration:200,
+		calls:[
+			[{scaleX:1.1},0.5],
+			[{scaleX:1.0},0.5]
+		]
+	})
+	$("#div2").on("mouseover",function(){ //鼠标移上去之后，应用自定义动画
+		$(this).velocity("lixin.pluse");
+	})
+})
+</script>
+</html>
